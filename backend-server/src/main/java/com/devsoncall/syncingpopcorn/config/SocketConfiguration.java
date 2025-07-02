@@ -1,5 +1,6 @@
 package com.devsoncall.syncingpopcorn.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
@@ -12,11 +13,14 @@ import com.devsoncall.syncingpopcorn.controller.SocketController;
 @EnableWebSocket
 public class SocketConfiguration implements WebSocketConfigurer {
 
+  @Value("${app.websocket.allowed-origin}")
+  private String allowedOrigin;
+	  
   @Override
   public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
     registry
         .addHandler(socketController(), "/socket")
-        .setAllowedOrigins("http://localhost:3000")
+        .setAllowedOrigins(allowedOrigin)//"http://localhost:3000"
         .withSockJS();
   }
 

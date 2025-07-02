@@ -9,6 +9,10 @@
 #
 # You can edit/add any Spring Boot config here at any time.
 
+app:
+  websocket:
+    allowed-origin: http://localhost:3000
+    
 spring:
   h2:
     console:
